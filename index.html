@@ -1,0 +1,151 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./microgram.css"/>
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.0.0-rc.1/jsencrypt.min.js"></script>
+        <script src="./ecm.js"></script>
+    </head>
+    <div class="container">
+        <h1>Ethereum Cloud Messaging Network</h1>
+        <p>Decentralized network for sending browser push notification to user's Ethereum addresses</p>
+        <div class="card">
+            <h2>Subscribe to Notifications from Ethereum</h2>
+            <small>Currently only on ROPSTEN</small>
+            <p>
+                Upon subscription
+                <ul>
+                    <li>Developers will be able to send a push notification to your Ethereum Address</li>
+                    <li>You will receive a push notification pop up on your browser</li>
+                    <li>Developers will have to pay to send you a notification, you'll earn a part of it</li>
+                </ul>
+            </p>
+            <button onclick="register()">Subscribe to notifications</button>
+            
+        </div>
+        <div class="card">
+            <h2>For Developers</h2>
+            <p>You can start sending push notifications by calling the send notification function on the ECM contract</p>
+
+            <pre>
+  // using ethers.js : 
+  const server = await this.contract.getUserRegistrationServer(user);
+  const price = await this.contract.getServerPrice(server);
+  this.contract.connect(this.signer).sendNotification(user, title, data, image, { value: price });        
+            </pre>
+
+            <p>Contract Address :</p>
+            <pre>  0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3</pre>
+            <p>Contract ABI :</p>
+            <pre>
+  [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"server","type":"address"},{"indexed":false,"internalType":"string","name":"encryptedPushToken","type":"string"},{"indexed":false,"internalType":"string","name":"title","type":"string"},{"indexed":false,"internalType":"string","name":"data","type":"string"},{"indexed":false,"internalType":"string","name":"image","type":"string"}],"name":"NewNotification","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"server","type":"address"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"NewServer","type":"event"},{"inputs":[{"internalType":"address","name":"server","type":"address"}],"name":"getServerPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"server","type":"address"}],"name":"getServerPublicKey","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"server","type":"address"}],"name":"getServerVapidKey","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getUserPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getUserRegistrationServer","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"isUserRegistered","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"publicKey","type":"string"},{"internalType":"string","name":"vapidKey","type":"string"}],"name":"registerServer","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"server","type":"address"},{"internalType":"string","name":"encryptedPushToken","type":"string"},{"internalType":"string","name":"metadata","type":"string"}],"name":"registerUser","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"},{"internalType":"string","name":"title","type":"string"},{"internalType":"string","name":"data","type":"string"},{"internalType":"string","name":"image","type":"string"}],"name":"sendNotification","outputs":[],"stateMutability":"payable","type":"function"}]
+            </pre>
+
+
+        </div>
+
+        <div class="card">
+            <h2>For Supporters</h2>
+            <p>ECM network works better when more developers integrate ECM on their websites. By adding ECM to your website, you are connecting the service worker on your website to the ECM network. Other developers can pay to notify users through your website's service worker.</p>
+            <h3>To support ECM : </h3>
+            <h4>1. Add the library to your website </h4>
+            <pre>
+  &lt;script src="./ecm.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+  async function register(){
+    if(!window.ethereum){
+        alert("You must install metamask to connect to ECM");
+        window.location.href = "https://metamask.io";
+    }
+    await window.ethereum.enable();
+    const ecm = new ECM();
+    ecm.register("0x0D5138BC001aFaEf7Fc679DE66463E3108dc7C26", true);  
+  }
+  &lt;/script&gt;
+            </pre>
+            <h4>2. Create a service worked</h4>
+            <p>A service worked called sw.js in the root directory of your project such that is is accessible from /sw.js</p>
+            <pre>
+  // sw.js
+  self.addEventListener('push', function(e) {
+    var options = {
+      body: e.data.json().data,
+    };
+    e.waitUntil(
+      self.registration.showNotification(`ECM: ${e.data.json().title}`, options)
+    );
+  });            
+            </pre>
+
+        </div>
+    </div>
+    <div class="card">
+        <h2>Become a service provider</h2>
+        <p>ECM service providers can earn by being a relayer of notifications</p>
+        <h4>1. Git Clone</h4>
+        <pre>
+  git clone https://github.com/madhavanmalolan/ecm.git
+        </pre>
+
+        <h4>2. Install</h4>
+        <pre>  cd ecm && npm install </pre>        
+
+
+        <h4>3. Generate rsa keys </h4>
+        <pre>
+  $ openssl genrsa -out id_rsa 8192
+  $ openssl rsa -pubout -in id_rsa -out id_rsa.pub
+        </pre>
+
+        <h4>4. Generate VAPID keys </h4>
+        <pre>  $ node vapid_keys.js </pre>
+
+        <h4>5. Populate .env</h4>
+        <pre>
+    RPC_ENDPOINT=wss://ropsten.infura.io/ws/v3/YOUR_INFURA_TOKEN
+    CONTRACT_ADDRESS=0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3
+    VAPID_PUBLIC_KEY= ENTER VAPID PUBLIC KEY HERE
+    VAPID_PRIVATE_KEY=ENTER VAPID PRIVATE KEY HERE
+    ETH_ADDRESS= YOUR ETHEREUM ADDRESS
+    ETH_PRIVATEKEY= YOUR ETHEREUM PRIVATE KEY
+        </pre>
+
+        <h4>6. Start  and keep service running</h4>
+        <p>You must run the server continuously</p>
+        <pre>  screen -d -m node index.js  </pre>
+
+        <h4>7. Register your service provider </h4>
+        Follow <a href="https://ethcontract.app/0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3/registerServer?abi=f22f4eba0d5b432754ce36650314790d">this link to register</a>
+        <br />Set payable value to be the number of wei a developer should pay to send a notification to a user registered to your server.
+
+        <h4>8. Ask Supporters to use your eth address in the ECM instance on their websites</h4>
+        <p>When notifications are sent to the users on your server, you earn ETH</p>
+        <pre>
+  const ecm = new ECM();
+  ecm.register("YOUR ADDRESS HERE", true);  
+        </pre>
+        
+    </div>
+    <a href="https://ecm.org"><img src="./ecm_notconnected.png" id="ecm_connect_button" style="position: fixed; height: 64; bottom:12; left: 12;"/></a>
+    
+
+    <script>
+        async function register(){
+            if(!window.ethereum){
+                alert("You must install metamask to connect to ECM");
+                window.location.href = "https://metamask.io";
+            }
+            await window.ethereum.enable();
+            const ecm = new ECM();
+            ecm.register("0x0D5138BC001aFaEf7Fc679DE66463E3108dc7C26", true);
+        }
+        async function init(){
+            const ecm = await new ECM();
+            if(await ecm.isRegistered()){
+                document.getElementById('ecm_connect_button').setAttribute("src", "./ecm_connected.png");
+            }
+        }
+        init();
+
+    </script>
+</html>
