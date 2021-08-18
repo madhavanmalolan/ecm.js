@@ -2,8 +2,9 @@ class ECM {
     w3 = null;
     contract = null;
     signer = null;
-    constructor(serviceWorker="/sw.js") {
-
+    serviceWorker = "./sw.js";
+    constructor(serviceWorker="./sw.js") {
+        this.serviceWorker = serviceWorker;
         navigator.serviceWorker.register(serviceWorker).then(function(registration) {
             console.log('Service worker registration succeeded:', registration);
           }, /*catch*/ function(error) {
@@ -285,7 +286,7 @@ class ECM {
 
         if ('serviceWorker' in navigator) {
             // declaring scope manually
-            navigator.serviceWorker.register('./sw.js', {scope: '*'}).then(async function(registration) {
+            navigator.serviceWorker.register(this.serviceWorker, {scope: '*'}).then(async function(registration) {
                 const publicKey = await self.contract.getServerPublicKey(server);
                 const vapidKey = await self.contract.getServerVapidKey(server);
                 const price = await self.contract.getServerPrice(server);
