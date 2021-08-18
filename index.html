@@ -21,6 +21,8 @@
                 </ul>
             </p>
             <button onclick="register()">Subscribe to notifications</button>
+            <br />
+            <a href="https://ethcontract.app/0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3/sendNotification?abi=f22f4eba0d5b432754ce36650314790d"><button>Send a Notification</button></a>
             
         </div>
         <div class="card">
@@ -50,7 +52,7 @@
             <h3>To support ECM : </h3>
             <h4>1. Add the library to your website </h4>
             <pre>
-  &lt;script src="./ecm.js"&gt;&lt;/script&gt;
+  &lt;script src="https://madhavanmalolan.github.io/ecm.js/ecm.js"&gt;&lt;/script&gt;
   &lt;script&gt;
   async function register(){
     if(!window.ethereum){
@@ -126,7 +128,7 @@
         </pre>
         
     </div>
-    <a href="https://ecm.org"><img src="./ecm_notconnected.png" id="ecm_connect_button" style="position: fixed; height: 64; bottom:12; left: 12;"/></a>
+    <a href="https://madhavanmalolan.github.io/ecm.js"><img src="https://madhavanmalolan.github.io/ecm.js/ecm_notconnected.png" id="ecm_connect_button" style="position: fixed; height: 64; bottom:12; left: 12;"/></a>
     
 
     <script>
@@ -142,7 +144,7 @@
         async function init(){
             const ecm = await new ECM();
             if(await ecm.isRegistered()){
-                document.getElementById('ecm_connect_button').setAttribute("src", "./ecm_connected.png");
+                document.getElementById('ecm_connect_button').setAttribute("src", "https://madhavanmalolan.github.io/ecm.js/ecm_connected.png");
             }
         }
         init();
