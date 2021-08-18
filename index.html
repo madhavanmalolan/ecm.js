@@ -63,7 +63,16 @@
     const ecm = new ECM();
     ecm.register("0x0D5138BC001aFaEf7Fc679DE66463E3108dc7C26", true);  
   }
+  async function init(){
+    const ecm = await new ECM();
+    if(await ecm.isRegistered()){
+        document.getElementById('ecm_connect_button').setAttribute("src", "https://madhavanmalolan.github.io/ecm.js/ecm_connected.png");
+    }
+  }
+  init();
   &lt;/script&gt;
+  &lt;a href="https://madhavanmalolan.github.io/ecm.js"&gt;&lt;img src="https://madhavanmalolan.github.io/ecm.js/ecm_notconnected.png" id="ecm_connect_button" style="position: fixed; height: 64; bottom:12; left: 12;"/&gt;&lt;/a&gt;
+
             </pre>
             <h4>2. Create a service worked</h4>
             <p>A service worked called sw.js in the root directory of your project such that is is accessible from /sw.js</p>
