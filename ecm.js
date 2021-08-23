@@ -19,7 +19,7 @@ class ECM {
         // send ether and pay to change state within the blockchain.
         // For this, you need the account signer...
         this.signer = provider.getSigner();
-        this.contract = new ethers.Contract("0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3", 
+        this.contract = new ethers.Contract("0x2F04837B299d8eD4cd8d6bBa69F48EdFEc401daD", 
         [
             {
                 "inputs": [],

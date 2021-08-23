@@ -22,7 +22,7 @@
             </p>
             <button onclick="register()">Subscribe to notifications</button>
             <br />
-            <a href="https://ethcontract.app/0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3/sendNotification?abi=f22f4eba0d5b432754ce36650314790d"><button>Send a Notification</button></a>
+            <a href="https://ethcontract.app/0x2F04837B299d8eD4cd8d6bBa69F48EdFEc401daD/sendNotification?abi=f22f4eba0d5b432754ce36650314790d"><button>Send a Notification</button></a>
             
         </div>
         <div class="card">
@@ -37,7 +37,7 @@
             </pre>
 
             <p>Contract Address :</p>
-            <pre>  0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3</pre>
+            <pre>  0x2F04837B299d8eD4cd8d6bBa69F48EdFEc401daD</pre>
             <p>Contract ABI :</p>
             <pre>
   [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"server","type":"address"},{"indexed":false,"internalType":"string","name":"encryptedPushToken","type":"string"},{"indexed":false,"internalType":"string","name":"title","type":"string"},{"indexed":false,"internalType":"string","name":"data","type":"string"},{"indexed":false,"internalType":"string","name":"image","type":"string"}],"name":"NewNotification","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"server","type":"address"},{"indexed":false,"internalType":"uint256","name":"price","type":"uint256"}],"name":"NewServer","type":"event"},{"inputs":[{"internalType":"address","name":"server","type":"address"}],"name":"getServerPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"server","type":"address"}],"name":"getServerPublicKey","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"server","type":"address"}],"name":"getServerVapidKey","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getUserPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getUserRegistrationServer","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"isUserRegistered","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"publicKey","type":"string"},{"internalType":"string","name":"vapidKey","type":"string"}],"name":"registerServer","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"server","type":"address"},{"internalType":"string","name":"encryptedPushToken","type":"string"},{"internalType":"string","name":"metadata","type":"string"}],"name":"registerUser","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"user","type":"address"},{"internalType":"string","name":"title","type":"string"},{"internalType":"string","name":"data","type":"string"},{"internalType":"string","name":"image","type":"string"}],"name":"sendNotification","outputs":[],"stateMutability":"payable","type":"function"}]
@@ -61,7 +61,7 @@
     }
     await window.ethereum.enable();
     const ecm = new ECM();
-    ecm.register("0x0D5138BC001aFaEf7Fc679DE66463E3108dc7C26", true);  
+    ecm.register("0x2F04837B299d8eD4cd8d6bBa69F48EdFEc401daD", true);  
   }
   async function init(){
     const ecm = await new ECM();
@@ -114,7 +114,7 @@
         <h4>5. Populate .env</h4>
         <pre>
     RPC_ENDPOINT=wss://ropsten.infura.io/ws/v3/YOUR_INFURA_TOKEN
-    CONTRACT_ADDRESS=0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3
+    CONTRACT_ADDRESS=0x2F04837B299d8eD4cd8d6bBa69F48EdFEc401daD
     VAPID_PUBLIC_KEY= ENTER VAPID PUBLIC KEY HERE
     VAPID_PRIVATE_KEY=ENTER VAPID PRIVATE KEY HERE
     ETH_ADDRESS= YOUR ETHEREUM ADDRESS
@@ -126,7 +126,7 @@
         <pre>  screen -d -m node index.js  </pre>
 
         <h4>7. Register your service provider </h4>
-        Follow <a href="https://ethcontract.app/0x2efF4A6d1C101D0C4c33e13FC21De523bAfDA5b3/registerServer?abi=f22f4eba0d5b432754ce36650314790d">this link to register</a>
+        Follow <a href="https://ethcontract.app/0x2F04837B299d8eD4cd8d6bBa69F48EdFEc401daD/registerServer?abi=f22f4eba0d5b432754ce36650314790d">this link to register</a>
         <br />Set payable value to be the number of wei a developer should pay to send a notification to a user registered to your server.
 
         <h4>8. Ask Supporters to use your eth address in the ECM instance on their websites</h4>
